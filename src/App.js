@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import CodeEditor from './components/CodeEditor';
+import Landing from './components/Landing';
+
 
 function App() {
   return (
-    <div>
-      <CodeEditor />
+    <div className=' bg-gray-300' >
+      <Landing />
     </div>
   );
 }
