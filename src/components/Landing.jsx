@@ -18,7 +18,7 @@ import LanguagesDropdown from "./LanguagesDropdown";
 const javascriptDefault = `/**
 * Your code.
 */
-console.log("default")
+console.log("Hello World")
 `;
 
 const Landing = () => {
@@ -59,19 +59,18 @@ const Landing = () => {
         setProcessing( true );
         const formData = {
             language_id: language.id,
-            // encode source code in base64
             source_code: btoa( code ),
             stdin: btoa( customInput ),
         };
         const options = {
             method: "POST",
-            url: process.env.REACT_APP_RAPID_API_URL,
+            url: "https://judge0-ce.p.rapidapi.com/submissions",
             params: { base64_encoded: "true", fields: "*" },
             headers: {
-                "content-type": "application/json",
-                "Content-Type": "application/json",
-                "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
-                "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+                'content-type': 'application/json',
+                'Content-Type': 'application/json',
+                "X-RapidAPI-Host": 'judge0-ce.p.rapidapi.com',
+                "X-RapidAPI-Key": '64b7284796msh75e87a13e982ad2p1a0e79jsn258ca5dfa747',
             },
             data: formData,
         };
@@ -104,11 +103,11 @@ const Landing = () => {
     const checkStatus = async ( token ) => {
         const options = {
             method: "GET",
-            url: process.env.REACT_APP_RAPID_API_URL + "/" + token,
+            url: 'https://judge0-ce.p.rapidapi.com/submissions/' + token,
             params: { base64_encoded: "true", fields: "*" },
             headers: {
-                "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
-                "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+                "X-RapidAPI-Host": 'judge0-ce.p.rapidapi.com',
+                "X-RapidAPI-Key": '64b7284796msh75e87a13e982ad2p1a0e79jsn258ca5dfa747',
             },
         };
         try {
@@ -198,8 +197,8 @@ const Landing = () => {
                     <ThemeDropdown handleThemeChange={ handleThemeChange } theme={ theme } />
                 </div>
             </div>
-            <div className="flex flex-row space-x-4 items-start px-4 py-4">
-                <div className="flex flex-col w-full h-full justify-start items-end">
+            <div className="flex flex-row flex-wrap  space-x-4 items-start justify-around px-4 py-4">
+                <div className=" sm:w-[90%]  md:w-[800px] h-full justify-start items-end">
                     <CodeEditorWindow
                         code={ code }
                         onChange={ onChange }
@@ -210,10 +209,10 @@ const Landing = () => {
                 <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
                     <OutputWindow outputDetails={ outputDetails } />
                     <div className="flex flex-col items-end">
-                        <CustomInput
+                        {/* <CustomInput
                             customInput={ customInput }
                             setCustomInput={ setCustomInput }
-                        />
+                        /> */}
                         <button
                             onClick={ handleCompile }
                             disabled={ !code }
