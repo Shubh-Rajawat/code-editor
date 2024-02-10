@@ -1,8 +1,20 @@
+import { useEffect } from 'react';
 import './App.css';
 import Landing from './components/Landing';
 
 
 function App() {
+
+useEffect(()=>{
+  document.addEventListener("visibilitychange", event => {
+    if (document.visibilityState == "visible") {
+      document.title = "Editor by Shubh"
+    } else {
+      document.title = "Come-Back-N-Code"
+    }
+  })
+},[])
+
   return (
     <div className='relative bg-gray-300' >
       <Landing />
